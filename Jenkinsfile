@@ -11,7 +11,7 @@ pipeline {
 
             stage('push-image') {
                         steps {
-                            sh './gradlew docker'
+                            sh './gradlew docker -i -s'
                             }
                         }
             }
