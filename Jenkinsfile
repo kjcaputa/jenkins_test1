@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_USERNAME = credentials('yaimer')
-        DOCKER_PASSWORD = credentials('123456789')
-        DOCKER_REGISTRY = 'yamier/zookeeper'
+        DOCKER_USERNAME = "yaimer"
+        DOCKER_PASSWORD = "123456789"
+        DOCKER_REGISTRY = "yamier/zookeeper"
     }
 
 
