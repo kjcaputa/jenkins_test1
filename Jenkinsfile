@@ -14,7 +14,7 @@ pipeline {
                         steps {
                             sh '''
                             BUILD_VERSION_NUMBER=V1.0.0
-                            docker build -t zookeepper .
+                            docker build -t zookeeper .
                             docker login -u 'yamier' -p '123456789'
                             docker tag zookeepper:latest yamier/zookeepper:$BUILD_VERSION_NUMBER
                             docker push yamier/zookeepper:$BUILD_VERSION_NUMBER
