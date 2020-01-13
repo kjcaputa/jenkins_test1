@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+
     stages {
             stage('build') {
                 steps {
@@ -13,6 +14,7 @@ pipeline {
                         steps {
                             sh '''
                             BUILD_VERSION_NUMBER=V1.0
+                            DOCKER_REGISTRY = yamier
                             docker build -t zookeepper .
                             docker login -u 'yamier' -p '123456789'
                             docker tag zookeepper:latest $DOCKER_REGISTRY/zookeepper:$BUILD_VERSION_NUMBER
