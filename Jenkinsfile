@@ -19,13 +19,11 @@ pipeline {
             stage('push-image') {
                         steps {
                             sh '''
-                            chown jenkins: /var/run/docker.sock
                             BUILD_VERSION_NUMBER=0.1.1
                             docker build -t zookeepper .
                             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                             docker tag zookeepper:latest $DOCKER_REGISTRY/zookeepper:$BUILD_VERSION_NUMBER
                             docker push $DOCKER_REGISTRY/zookeepper:$BUILD_VERSION_NUMBER
-                            chown root: /var/run/docker.sock
                             '''
                         }
             }
