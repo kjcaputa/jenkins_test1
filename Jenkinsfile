@@ -19,9 +19,9 @@ pipeline {
             stage('push-image') {
                         steps {
                             sh '''
-                            BUILD_VERSION_NUMBER=0.1.1
+                            BUILD_VERSION_NUMBER=0.1.1ß
                             docker build -t zookeepper .
-                            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                            docker login -u 'yamier' -p '123456789'
                             docker tag zookeepper:latest $DOCKER_REGISTRY/zookeepper:$BUILD_VERSION_NUMBER
                             docker push $DOCKER_REGISTRY/zookeepper:$BUILD_VERSION_NUMBER
                             '''
