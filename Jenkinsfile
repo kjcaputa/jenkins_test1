@@ -1,7 +1,12 @@
 pipeline {
-    agent {
-        dockerfile true
-        }
+    agent any
+
+    environment {
+        DOCKER_USERNAME = credentials('yaimer')
+        DOCKER_PASSWORD = credentials('123456789')
+        DOCKER_REGISTRY = 'yamier/zookeeper'
+    }
+
 
     stages {
             stage('build') {
@@ -13,8 +18,15 @@ pipeline {
 
             stage('push-image') {
                         steps {
-                            sh './gradlew docker -i -s'
-                            }
+                            sh '''
+                            chown jenkins: /var/run/docker.sock
+                            BUILD_VERSION_NUMBER=0.1.1
+                            docker build -t mytest_docker .
+                            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                            docker tag mytest_docker:latest $DOCKER_REGISTRY/mytest_docker:$BUILD_VERSION_NUMBER
+                            docker push $DOCKER_REGISTRY/mytest_docker:$BUILD_VERSION_NUMBER
+                            chown root: /var/run/docker.sock
+                            '''
                         }
             }
     }
